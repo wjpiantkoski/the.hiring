@@ -1,8 +1,10 @@
 import { luciaAdapter } from "@/prisma";
 import { IUserRepository } from "@/src/application/repositories/user.repository.interface";
-import { Lucia } from "lucia";
+import { IAuthenticationService } from "@/src/application/services/authentication.service.interface";
+import { User } from "@/src/entities/models/user";
+import { Cookie, Lucia, Session } from "lucia";
 
-export class AuthenticationService {
+export class AuthenticationService implements IAuthenticationService {
   private _lucia: Lucia;
 
   constructor(private readonly userRepository: IUserRepository) {
@@ -19,6 +21,18 @@ export class AuthenticationService {
         };
       },
     });
+  }
+
+  public async createSession(
+    user: User
+  ): Promise<{ session: Session; cookie: Cookie }> {
+    const session = await this._lucia.createSession(user.id!, {});
+    const cookie = this._lucia.createSessionCookie(session.id);
+
+    return {
+      cookie,
+      session,
+    };
   }
 }
 
