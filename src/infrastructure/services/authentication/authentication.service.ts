@@ -1,8 +1,10 @@
 import { luciaAdapter } from "@/prisma";
 import { IUserRepository } from "@/src/application/repositories/user.repository.interface";
 import { IAuthenticationService } from "@/src/application/services/authentication.service.interface";
+import { Cookie } from "@/src/entities/models/cookie";
+import { Session } from "@/src/entities/models/session";
 import { User } from "@/src/entities/models/user";
-import { Cookie, Lucia, Session } from "lucia";
+import { Lucia } from "lucia";
 
 export class AuthenticationService implements IAuthenticationService {
   private _lucia: Lucia;
