@@ -13,6 +13,7 @@
     "up:db": "docker compose --file compose.dev.yaml up"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@lucia-auth/adapter-prisma": "^4.0.1",
     "@node-rs/argon2": "^2.0.0",
     "@prisma/client": "^5.20.0",
