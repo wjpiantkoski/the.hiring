@@ -23,9 +23,11 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={theme}>
-      <body className={`${inter.className} antialiased`}>
+      <body
+        className={`${inter.className} antialiased min-h-screen grid grid-rows-3`}
+      >
         <NavigationBar />
-        <main className="p-4">{children}</main>
+        <main className="p-4 pt-20 row-span-3">{children}</main>
       </body>
     </html>
   );
