@@ -26,8 +26,14 @@ export default function SignupForm() {
   });
 
   const onSubmit = async (data: Signup): Promise<void> => {
+    const formData = new FormData();
+
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+
     try {
-      await signUp(data);
+      await signUp(formData);
     } catch (error) {
       console.error(error);
     }
