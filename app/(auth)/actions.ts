@@ -8,7 +8,6 @@ import { redirect } from "next/navigation";
 export async function signUp(formData: Signup) {
   const validatedData = signupSchema.safeParse(formData);
 
-  //TODO create custom errors
   if (!validatedData.success) {
     throw new Error("Invalid form data");
   }

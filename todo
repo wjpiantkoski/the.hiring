@@ -1,0 +1,6 @@
+//TODO custom errors
+//TODO handle errors in the frontend
+//TODO add authentication middleware
+//TODO refactor the UI structure (remove the top bar)
+//TODO create 404 page
+//TODO add sign up form loading

@@ -29,7 +29,6 @@ export default function SignupForm() {
     try {
       await signUp(data);
     } catch (error) {
-      //TODO handle error
       console.error(error);
     }
   };
