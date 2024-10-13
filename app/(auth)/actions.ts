@@ -5,7 +5,8 @@ import { signupSchema } from "@/src/entities/models/user";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-export async function signUp(formData: FormData) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function signUp(prevState: any, formData: FormData) {
   const validatedData = signupSchema.safeParse({
     name: formData.get("name") as string,
     email: formData.get("email") as string,
@@ -13,7 +14,9 @@ export async function signUp(formData: FormData) {
   });
 
   if (!validatedData.success) {
-    throw new Error("Invalid form data");
+    return {
+      errors: validatedData.error.flatten(),
+    };
   }
 
   const usecase = SignUpUseCaseFactory.create();
