@@ -13,6 +13,7 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { signUp } from "@/app/(auth)/actions";
 
 export default function SignupForm() {
   const form = useForm<Signup>({
@@ -25,7 +26,12 @@ export default function SignupForm() {
   });
 
   const onSubmit = async (data: Signup): Promise<void> => {
-    console.log(data);
+    try {
+      await signUp(data);
+    } catch (error) {
+      //TODO handle error
+      console.error(error);
+    }
   };
 
   return (
