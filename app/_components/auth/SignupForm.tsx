@@ -1,109 +1,54 @@
 "use client";
 
-import { Signup, signupSchema } from "@/src/entities/models/user";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-} from "../ui/form";
 import { Input } from "../ui/input";
-import { Button } from "../ui/button";
 import { signUp } from "@/app/(auth)/actions";
+import SubmitButton from "../@shared/SubmitButton";
+import { useFormState } from "react-dom";
+
+const initialState = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  errors: {} as any,
+  message: "",
+};
 
 export default function SignupForm() {
-  const form = useForm<Signup>({
-    resolver: zodResolver(signupSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-    },
-  });
-
-  const onSubmit = async (data: Signup): Promise<void> => {
-    const formData = new FormData();
-
-    formData.append("name", data.name);
-    formData.append("email", data.email);
-    formData.append("password", data.password);
-
-    try {
-      await signUp(formData);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const [state, formAction] = useFormState(signUp, initialState);
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input className="bg-stone-100 dark:bg-stone-800" {...field} />
-              </FormControl>
-              <FormDescription className="text-red-500 h-1">
-                {form.formState.errors.name?.message}
-              </FormDescription>
-            </FormItem>
-          )}
-        />
+    <form action={formAction} className="w-full space-y-5">
+      <div className="flex flex-col gap-1">
+        <label htmlFor="name" className="font-semibold">
+          Name
+        </label>
+        <Input type="text" id="name" name="name" required />
+        <span className="h-1 text-red-500 text-xs">
+          {state.errors.fieldErrors?.name}
+        </span>
+      </div>
 
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>E-mail</FormLabel>
-              <FormControl>
-                <Input
-                  className="bg-stone-100 dark:bg-stone-800"
-                  type="email"
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription className="text-red-500 h-1">
-                {form.formState.errors.email?.message}
-              </FormDescription>
-            </FormItem>
-          )}
-        />
+      <div className="flex flex-col gap-1">
+        <label htmlFor="email" className="font-semibold">
+          E-mail
+        </label>
+        <Input type="email" id="email" name="email" required />
+        <span className="h-1 text-red-500 text-xs">
+          {state.errors.fieldErrors?.email}
+        </span>
+      </div>
 
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Password</FormLabel>
-              <FormControl>
-                <Input
-                  className="bg-stone-100 dark:bg-stone-800"
-                  type="password"
-                  {...field}
-                />
-              </FormControl>
-              <FormDescription className="text-red-500 h-1">
-                {form.formState.errors.password?.message}
-              </FormDescription>
-            </FormItem>
-          )}
-        />
+      <div className="flex flex-col gap-1">
+        <label htmlFor="password" className="font-semibold">
+          Password
+        </label>
+        <Input type="password" id="password" name="password" required />
+        <span className="h-1 text-red-500 text-xs">
+          {state.errors.fieldErrors?.password}
+        </span>
+      </div>
 
-        <div className="pt-2">
-          <Button type="submit" size="lg" className="w-full">
-            Submit
-          </Button>
-        </div>
-      </form>
-    </Form>
+      <div className="pt-2">
+        <SubmitButton className="w-full">Submit</SubmitButton>
+      </div>
+    </form>
   );
 }
