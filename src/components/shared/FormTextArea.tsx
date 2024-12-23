@@ -1,8 +1,8 @@
 "use client";
 
 import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@radix-ui/react-label";
 import { UseFormRegister, FieldValues } from "react-hook-form";
+import { FormLabel } from "../ui/form";
 
 interface FormTextAreaProps {
   id: string;
@@ -20,7 +20,7 @@ const FormTextArea = ({
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col space-y-2">
-        <Label htmlFor={id}>{label}</Label>
+        <FormLabel htmlFor={id}>{label}</FormLabel>
         <Textarea id={id} {...register(id)} />
       </div>
 

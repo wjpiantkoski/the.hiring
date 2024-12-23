@@ -1,8 +1,8 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { UseFormRegister, FieldValues } from "react-hook-form";
+import { FormLabel } from "../ui/form";
 
 interface FormInputProps {
   id: string;
@@ -15,7 +15,7 @@ const FormInput = ({ id, label, errorMessage, register }: FormInputProps) => {
   return (
     <div className="flex flex-col w-full">
       <div className="flex flex-col space-y-2">
-        <Label htmlFor={id}>{label}</Label>
+        <FormLabel htmlFor={id}>{label}</FormLabel>
         <Input id={id} {...register(id)} />
       </div>
 
