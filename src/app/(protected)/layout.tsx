@@ -1,5 +1,5 @@
+import NavigationBar from "@/components/shared/NavigationBar";
 import React from "react";
-import NavigationBar from "../_components/shared/NavigationBar";
 
 const ProtectedLayout = ({
   children,
