@@ -10,6 +10,8 @@ import {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { UserButton, useAuth } from "@clerk/nextjs";
+import { Skeleton } from "../ui/skeleton";
 
 const menuItems = [
   {
@@ -32,6 +34,7 @@ const menuItems = [
 
 const NavigationBar = () => {
   const pathname = usePathname();
+  const { isLoaded } = useAuth();
 
   return (
     <nav className="py-4 fixed top-0 left-0 w-full bg-white shadow-sm z-50 px-4">
@@ -57,6 +60,9 @@ const NavigationBar = () => {
             </NavigationMenuItem>
           ))}
         </NavigationMenuList>
+
+        {!isLoaded && <Skeleton className="h-[28px] w-[28px] rounded-full" />}
+        {isLoaded && <UserButton />}
       </NavigationMenu>
     </nav>
   );
