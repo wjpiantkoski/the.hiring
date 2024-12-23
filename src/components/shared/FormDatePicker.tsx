@@ -13,6 +13,7 @@ interface FormDatePickerProps {
   errorMessage?: string;
   register: UseFormRegister<FieldValues>;
   control: Control<FieldValues>;
+  name: string;
 }
 
 const FormDatePicker = ({
@@ -21,14 +22,13 @@ const FormDatePicker = ({
   label,
   register,
   control,
+  name,
 }: FormDatePickerProps) => {
-  const formatDate = (date: Date) => dayjs(date).format("MMM DD, YYYY");
-
   return (
     <div className="flex flex-col w-full">
       <FormField
         control={control}
-        name="startDate"
+        name={name}
         render={({ field }) => (
           <FormItem>
             <FormLabel htmlFor={id}>{label}</FormLabel>
@@ -41,7 +41,7 @@ const FormDatePicker = ({
                     type="text"
                     placeholder="Select Date"
                     readOnly
-                    value={formatDate(field.value)}
+                    value={dayjs(field.value).format("MMM DD, YYYY")}
                     className="cursor-pointer"
                   />
                 </FormControl>
