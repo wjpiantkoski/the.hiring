@@ -1,14 +1,9 @@
-import ButtonProjectForm from "@/components/projects/ButtonProjectForm";
+import ProjectsPageHeader from "@/components/projects/ProjectsPageHeader";
 
 const Projects = () => {
-  const openProjectForm = () => {};
-
   return (
     <section>
-      <section className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Projects</h1>
-        <ButtonProjectForm onClick={openProjectForm} />
-      </section>
+      <ProjectsPageHeader title="Projects" />
     </section>
   );
 };
