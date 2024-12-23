@@ -1,18 +1,13 @@
-import { buttonVariants } from "@/components/ui/button";
-import Link from "next/link";
+import ButtonProjectForm from "@/components/projects/ButtonProjectForm";
 
 const Projects = () => {
+  const openProjectForm = () => {};
+
   return (
     <section>
       <section className="flex justify-between items-center">
         <h1 className="text-2xl font-bold">Projects</h1>
-
-        <Link
-          href="/projects/new"
-          className={buttonVariants({ variant: "secondary" })}
-        >
-          New project
-        </Link>
+        <ButtonProjectForm onClick={openProjectForm} />
       </section>
     </section>
   );
