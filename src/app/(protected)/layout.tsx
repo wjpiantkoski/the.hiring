@@ -10,7 +10,7 @@ const ProtectedLayout = ({
     <>
       <NavigationBar />
       <main className="min-h-screen">
-        <div className="max-w-[1200px] mx-auto">{children}</div>
+        <div className="max-w-[960px] mx-auto pt-24">{children}</div>
       </main>
     </>
   );

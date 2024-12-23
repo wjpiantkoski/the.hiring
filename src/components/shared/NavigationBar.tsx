@@ -38,7 +38,7 @@ const NavigationBar = () => {
 
   return (
     <nav className="py-4 fixed top-0 left-0 w-full bg-white shadow-sm z-50 px-4">
-      <NavigationMenu className="max-w-[1200px] mx-auto items-center justify-between">
+      <NavigationMenu className="max-w-[960px] mx-auto items-center justify-between">
         <Link href="/dashboard" className="text-xl font-bold mr-4">
           the.hiring
         </Link>
