@@ -7,9 +7,8 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { ProjectStatusColor, ProjectStatusSlug } from "@/utils/project-status";
-import { cn } from "@/lib/utils";
 import ProjectCardDate from "./ProjectCardDate";
+import ProjectStatusBadge from "./ProjectStatusBadge";
 
 const ProjectCard = ({
   id,
@@ -28,15 +27,9 @@ const ProjectCard = ({
         <CardHeader className="p-4 space-y-0">
           <CardTitle className="flex items-center justify-between">
             <span className="text-xl font-extrabold">{name}</span>
-
-            <div
-              className={cn(
-                "flex flex-col items-center justify-center h-6 rounded-sm text-xs font-normal px-2",
-                `bg-${ProjectStatusColor[status?.slug as ProjectStatusSlug]}`
-              )}
-            >
-              {status?.title}
-            </div>
+            {status && (
+              <ProjectStatusBadge variant={status.slug} title={status.title} />
+            )}
           </CardTitle>
 
           <CardDescription className="text-xs min-h-4">

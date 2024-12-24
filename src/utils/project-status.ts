@@ -5,7 +5,13 @@ export enum ProjectStatusSlug {
 }
 
 export const ProjectStatusColor = {
-  [ProjectStatusSlug.InProgress]: "sky-50",
-  [ProjectStatusSlug.Completed]: "green-50",
-  [ProjectStatusSlug.Cancelled]: "zync-50",
+  [ProjectStatusSlug.InProgress]: {
+    bg: "bg-sky-50",
+  },
+  [ProjectStatusSlug.Completed]: {
+    bg: "bg-green-50",
+  },
+  [ProjectStatusSlug.Cancelled]: {
+    bg: "bg-zync-50",
+  },
 };
