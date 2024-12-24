@@ -125,7 +125,7 @@ const ProjectFormDialog = ({
               errorMessage={form.formState.errors.deadline?.message}
             />
 
-            <div className="flex items-center space-x-2 mt-4">
+            <div className="flex items-center justify-end space-x-2 mt-4">
               <SubmitButton pending={form.formState.isSubmitting}>
                 Save
               </SubmitButton>
