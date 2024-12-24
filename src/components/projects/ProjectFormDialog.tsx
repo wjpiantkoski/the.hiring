@@ -26,6 +26,7 @@ import dayjs from "dayjs";
 import SubmitButton from "../shared/SubmitButton";
 import { useState } from "react";
 import { createProject } from "@/app/(protected)/projects/_actions/createProject";
+import { updateProject } from "@/app/(protected)/projects/_actions/updateProject";
 
 interface ProjectFormDialogProps {
   project?: Project;
@@ -64,7 +65,16 @@ const ProjectFormDialog = ({
   };
 
   const onSubmit = async (data: ProjectForm) => {
-    const response = await createProject(data);
+    let response;
+
+    if (project?.id) {
+      response = await updateProject({
+        id: project.id,
+        data,
+      });
+    } else {
+      response = await createProject(data);
+    }
 
     if (!response?.errors) {
       handleClose();
