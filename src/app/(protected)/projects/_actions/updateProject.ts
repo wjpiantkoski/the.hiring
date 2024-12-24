@@ -50,6 +50,5 @@ export const updateProject = async ({ id, data }: UpdateProjectInput) => {
     },
   });
 
-  revalidatePath("/projects");
-  revalidatePath(`/projects/${id}`);
+  revalidatePath(`/projects`);
 };
