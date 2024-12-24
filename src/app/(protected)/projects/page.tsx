@@ -1,7 +1,7 @@
 import ProjectsPageHeader from "@/components/projects/ProjectsPageHeader";
-import { getProjects } from "./actions";
 import ProjectCard from "@/components/projects/ProjectCard";
 import ProjectsEmptyState from "@/components/projects/ProjectsEmptyState";
+import { getProjects } from "./_actions/getProjects";
 
 const Projects = async () => {
   const { projects } = await getProjects();

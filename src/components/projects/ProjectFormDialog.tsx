@@ -23,9 +23,9 @@ import FormTextArea from "../shared/FormTextArea";
 import { Form } from "../ui/form";
 import FormDatePicker from "../shared/FormDatePicker";
 import dayjs from "dayjs";
-import { createProject } from "@/app/(protected)/projects/actions";
 import SubmitButton from "../shared/SubmitButton";
 import { useState } from "react";
+import { createProject } from "@/app/(protected)/projects/_actions/createProject";
 
 interface ProjectFormDialogProps {
   project?: Project;
