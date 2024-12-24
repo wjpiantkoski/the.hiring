@@ -43,3 +43,38 @@ export const createProject = async (input: ProjectForm) => {
 
   revalidatePath("/projects");
 };
+
+export const getProjects = async () => {
+  const { userId } = await auth();
+
+  if (!userId) {
+    return {
+      errors: {
+        server: ["User not found"],
+      },
+    };
+  }
+
+  const projects = await prisma.project.findMany({
+    where: {
+      userId,
+    },
+    select: {
+      id: true,
+      name: true,
+      startDate: true,
+      deadline: true,
+      description: true,
+      status: {
+        select: {
+          title: true,
+          slug: true,
+        },
+      },
+    },
+  });
+
+  return {
+    projects,
+  };
+};
