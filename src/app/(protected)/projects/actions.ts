@@ -2,6 +2,7 @@
 
 import prisma from "@/lib/prisma";
 import { ProjectForm, projectFormSchema } from "@/lib/zod/schemas/project";
+import { Project } from "@/types/project";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
@@ -44,7 +45,14 @@ export const createProject = async (input: ProjectForm) => {
   revalidatePath("/projects");
 };
 
-export const getProjects = async () => {
+interface GetProjectsOutput {
+  projects?: Project[];
+  errors?: {
+    server: string[];
+  };
+}
+
+export const getProjects = async (): Promise<GetProjectsOutput> => {
   const { userId } = await auth();
 
   if (!userId) {
@@ -71,6 +79,9 @@ export const getProjects = async () => {
           slug: true,
         },
       },
+    },
+    orderBy: {
+      deadline: "asc",
     },
   });
 
