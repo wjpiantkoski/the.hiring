@@ -24,7 +24,7 @@ import { Form } from "../ui/form";
 import FormDatePicker from "../shared/FormDatePicker";
 import dayjs from "dayjs";
 import SubmitButton from "../shared/SubmitButton";
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { createProject } from "@/app/(protected)/projects/_actions/createProject";
 import { updateProject } from "@/app/(protected)/projects/_actions/updateProject";
 
@@ -56,13 +56,21 @@ const ProjectFormDialog = ({
 
   const form = useForm<ProjectForm>({
     resolver: zodResolver(projectFormSchema),
-    defaultValues: (project as ProjectForm) ?? initialProjectValues,
+    defaultValues: useMemo(() => {
+      return project ? ({ ...project } as ProjectForm) : initialProjectValues;
+    }, [project]),
   });
 
-  const handleClose = () => {
+  useEffect(() => {
+    form.reset(
+      project ? ({ ...project } as ProjectForm) : initialProjectValues
+    );
+  }, [project]);
+
+  const handleClose = useCallback(() => {
     onClose();
     form.reset(initialProjectValues);
-  };
+  }, []);
 
   const onSubmit = async (data: ProjectForm) => {
     let response;
